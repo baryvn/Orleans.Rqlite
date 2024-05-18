@@ -7,14 +7,12 @@ namespace Microsoft.Extensions.Hosting
 {
     public static class RqliteHostingExtensions
     {
-        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder,
-           Action<RqliteClusteringOptions> configureOptions)
+        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder, Action<RqliteClusteringOptions> configureOptions)
         {
             return builder.ConfigureServices(services => services.UseRqliteMembership(configureOptions));
         }
 
-        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder,
-            Action<OptionsBuilder<RqliteClusteringOptions>> configureOptions)
+        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder, Action<OptionsBuilder<RqliteClusteringOptions>> configureOptions)
         {
             return builder.ConfigureServices(services => services.UseRqliteMembership(configureOptions));
         }

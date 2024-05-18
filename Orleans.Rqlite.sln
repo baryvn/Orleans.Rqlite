@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Persistence.Rqlite"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Reminders.Rqlite", "src\Orleans.Reminders.Rqlite\Orleans.Reminders.Rqlite.csproj", "{1BEDED01-6E47-4F21-8BFE-BF9E88547850}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiloTest", "SiloTest\SiloTest.csproj", "{E08D5A9C-367B-463A-9620-5F7A74D5A738}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1BEDED01-6E47-4F21-8BFE-BF9E88547850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BEDED01-6E47-4F21-8BFE-BF9E88547850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BEDED01-6E47-4F21-8BFE-BF9E88547850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08D5A9C-367B-463A-9620-5F7A74D5A738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08D5A9C-367B-463A-9620-5F7A74D5A738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08D5A9C-367B-463A-9620-5F7A74D5A738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08D5A9C-367B-463A-9620-5F7A74D5A738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
