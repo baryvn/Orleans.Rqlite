@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Orleans.Server" Version="8.1.0" />
+		<PackageReference Include="RqliteNet" Version="1.1.0" />
+	</ItemGroup>
+
+
+
+	<PropertyGroup>
+		<PackageId>Orleans.Persistence.Rqlite</PackageId>
+		<Authors>Bary</Authors>
+		<Title>Microsoft Orleans Reminder Service for Rqlite</Title>
+		<Description>Microsoft Orleans Reminder Service for Rqlite</Description>
+		<PackageProjectUrl>https://github.com/baryvn/Orleans.Rqlite</PackageProjectUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/dotnet/orleans/gh-pages/assets/logo_128.png</PackageIconUrl>
+		<PackageTags>Orleans Cloud-Computing Actor-Model Actors Distributed-Systems Rqlite C# .NET</PackageTags>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/baryvn/Orleans.Rqlite</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<IncludeSymbols>true</IncludeSymbols>
+		<IncludeSource>true</IncludeSource>
+		<Version>8.0</Version>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+</Project>

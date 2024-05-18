@@ -1,0 +1,12 @@
+﻿namespace Orleans.Reminders.Rqlite
+{
+    public class RqliteReminderStorageOptions
+    {
+        public string Host { get; internal set; } = "localhost";
+        public int Port { get; internal set; } = 3000;
+        public string Namespace { get; internal set; } = "dev";
+        public string SetName { get; internal set; } = "reminderTable";
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+}
