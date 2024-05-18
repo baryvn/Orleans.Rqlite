@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -11,15 +10,13 @@
 		<PackageReference Include="RqliteNet" Version="1.1.0" />
 	</ItemGroup>
 
-
-
 	<PropertyGroup>
 		<PackageId>Orleans.Persistence.Rqlite</PackageId>
-		<Authors>Bary</Authors>
+		<Authors>BARRY</Authors>
 		<Title>Microsoft Orleans Reminder Service for Rqlite</Title>
 		<Description>Microsoft Orleans Reminder Service for Rqlite</Description>
 		<PackageProjectUrl>https://github.com/baryvn/Orleans.Rqlite</PackageProjectUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/dotnet/orleans/gh-pages/assets/logo_128.png</PackageIconUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/baryvn/Orleans.Rqlite/main/bary-favicon-color.svg</PackageIconUrl>
 		<PackageTags>Orleans Cloud-Computing Actor-Model Actors Distributed-Systems Rqlite C# .NET</PackageTags>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
