@@ -6,11 +6,10 @@
 
 **Orleans.Rqlite** is a package that use Rqlite as a backend for Orleans providers like Cluster Membership, Grain State storage and Reminders. 
 
-# Installation coming soon
+# Installation 
 Nuget Packages are provided:
-
-*Orleans.Clustering.Rqlite*
-
 *Orleans.Persistence.Rqlite*
 
+** coming soon **
+*Orleans.Clustering.Rqlite*
 *Orleans.Reminder.Rqlite*
