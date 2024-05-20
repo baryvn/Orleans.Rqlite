@@ -8,8 +8,8 @@
 
 # Installation 
 Nuget Packages are provided:
-*Orleans.Persistence.Rqlite*
+- Orleans.Persistence.Rqlite
 
 ** coming soon **
-*Orleans.Clustering.Rqlite*
-*Orleans.Reminder.Rqlite*
+- Orleans.Clustering.Rqlite
+- Orleans.Reminder.Rqlite
