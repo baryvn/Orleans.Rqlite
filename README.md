@@ -58,7 +58,7 @@ using IHost host = builder.Build();
 await host.RunAsync();
 ```
 
-## Client ASP.net
+## Client 
 ```
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseOrleansClient(client =>
