@@ -9,7 +9,71 @@
 # Installation 
 Nuget Packages are provided:
 - Orleans.Persistence.Rqlite
+- Orleans.Clustering.Rqlite
 
 ## coming soon
-- Orleans.Clustering.Rqlite
 - Orleans.Reminder.Rqlite
+
+
+## Silo
+```
+IHostBuilder builder = Host.CreateDefaultBuilder(args)
+    .UseOrleans(silo =>
+    {
+        silo.Configure<ClusterOptions>(options =>
+        {
+            options.ClusterId = "DEV";
+            options.ServiceId = "DEV";
+
+        });
+        silo.UseRqliteClustering(option =>
+        {
+            option.Uri = "http://localhost:4001";
+        });
+        silo.UseRqliteReminder((RqliteReminderStorageOptions options) =>
+        {
+
+        });
+        silo.AddRqliteGrainStorage("test", options =>
+        {
+            options.Uri = "http://localhost:4001";
+        });
+        silo.ConfigureLogging(logging => logging.AddConsole());
+
+        silo.ConfigureEndpoints(
+            siloPort: 11111,
+            gatewayPort: 30001
+            );
+
+        silo.Configure<ClusterMembershipOptions>(options =>
+        {
+            options.EnableIndirectProbes = true;
+            options.UseLivenessGossip = true;
+        });
+    })
+    .UseConsoleLifetime();
+
+using IHost host = builder.Build();
+
+await host.RunAsync();
+```
+
+## Client ASP.net
+```
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseOrleansClient(client =>
+{
+    client.UseRqliteClustering(option =>
+    {
+        option.Uri = "http://localhost:4001";
+    });
+
+    client.Configure<ClusterOptions>(options =>
+    {
+        options.ClusterId = "DEV";
+        options.ServiceId = "DEV";
+
+    });
+});
+
+```
