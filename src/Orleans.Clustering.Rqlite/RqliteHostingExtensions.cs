@@ -1,74 +1,117 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Orleans.Clustering.Rqlite;
 using Orleans.Messaging;
+using Orleans.Runtime.Membership;
+using Orleans.Configuration;
 
-namespace Microsoft.Extensions.Hosting
+namespace Orleans.Hosting
 {
+
     public static class RqliteHostingExtensions
     {
-        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder, Action<RqliteClusteringOptions> configureOptions)
+        /// <summary>
+        /// Configures the silo to use Rqlite for cluster membership.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder.
+        /// </param>
+        /// <param name="configureOptions">
+        /// The configuration delegate.
+        /// </param>
+        /// <returns>
+        /// The provided <see cref="ISiloBuilder"/>.
+        /// </returns>
+        public static ISiloBuilder UseRqliteClustering(
+            this ISiloBuilder builder,
+            Action<RqliteClusteringSiloOptions> configureOptions)
         {
-            return builder.ConfigureServices(services => services.UseRqliteMembership(configureOptions));
+            return builder.ConfigureServices(
+                services =>
+                {
+                    if (configureOptions != null)
+                    {
+                        services.Configure(configureOptions);
+                    }
+
+                    services.AddSingleton<IMembershipTable, RqliteBasedMembershipTable>();
+                });
         }
 
-        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder, Action<OptionsBuilder<RqliteClusteringOptions>> configureOptions)
+        /// <summary>
+        /// Configures the silo to use Rqlite for cluster membership.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder.
+        /// </param>
+        /// <param name="configureOptions">
+        /// The configuration delegate.
+        /// </param>
+        /// <returns>
+        /// The provided <see cref="ISiloBuilder"/>.
+        /// </returns>
+        public static ISiloBuilder UseRqliteClustering(
+            this ISiloBuilder builder,
+            Action<OptionsBuilder<RqliteClusteringSiloOptions>> configureOptions)
         {
-            return builder.ConfigureServices(services => services.UseRqliteMembership(configureOptions));
+            return builder.ConfigureServices(
+                services =>
+                {
+                    configureOptions?.Invoke(services.AddOptions<RqliteClusteringSiloOptions>());
+                    services.AddSingleton<IMembershipTable, RqliteBasedMembershipTable>();
+                });
         }
 
-        public static ISiloBuilder UseRqliteMembership(this ISiloBuilder builder)
+        /// <summary>
+        /// Configure the client to use Rqlite for clustering.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder.
+        /// </param>
+        /// <param name="configureOptions">
+        /// The configuration delegate.
+        /// </param>
+        /// <returns>
+        /// The provided <see cref="IClientBuilder"/>.
+        /// </returns>
+        public static IClientBuilder UseRqliteClustering(
+            this IClientBuilder builder,
+            Action<RqliteGatewayListProviderOptions> configureOptions)
         {
-            return builder.ConfigureServices(services =>
-            {
-                services.AddOptions<RqliteClusteringOptions>();
-                services.AddSingleton<IMembershipTable, RqliteMembershipTable>();
-            });
+            return builder.ConfigureServices(
+                services =>
+                {
+                    if (configureOptions != null)
+                    {
+                        services.Configure(configureOptions);
+                    }
+
+                    services.AddSingleton<IGatewayListProvider, RqliteGatewayListProvider>();
+                });
         }
 
-        public static IClientBuilder UseRqliteGatewayListProvider(this IClientBuilder builder, Action<RqliteGatewayOptions> configureOptions)
+        /// <summary>
+        /// Configure the client to use Rqlite for clustering.
+        /// </summary>
+        /// <param name="builder">
+        /// The builder.
+        /// </param>
+        /// <param name="configureOptions">
+        /// The configuration delegate.
+        /// </param>
+        /// <returns>
+        /// The provided <see cref="IClientBuilder"/>.
+        /// </returns>
+        public static IClientBuilder UseRqliteClustering(
+            this IClientBuilder builder,
+            Action<OptionsBuilder<RqliteGatewayListProviderOptions>> configureOptions)
         {
-            return builder.ConfigureServices(services => services.UseRqliteGatewayListProvider(configureOptions));
-        }
-
-        public static IClientBuilder UseRqliteGatewayListProvider(this IClientBuilder builder)
-        {
-            return builder.ConfigureServices(services =>
-            {
-                services.AddOptions<RqliteGatewayOptions>();
-                services.AddSingleton<IGatewayListProvider, RqliteGatewayListProvider>();
-            });
-        }
-
-        public static IClientBuilder UseRqliteGatewayListProvider(this IClientBuilder builder, Action<OptionsBuilder<RqliteGatewayOptions>> configureOptions)
-        {
-            return builder.ConfigureServices(services => services.UseRqliteGatewayListProvider(configureOptions));
-        }
-
-        public static IServiceCollection UseRqliteMembership(this IServiceCollection services,
-            Action<RqliteClusteringOptions> configureOptions)
-        {
-            return services.UseRqliteMembership(ob => ob.Configure(configureOptions));
-        }
-
-        public static IServiceCollection UseRqliteMembership(this IServiceCollection services,
-            Action<OptionsBuilder<RqliteClusteringOptions>> configureOptions)
-        {
-            configureOptions?.Invoke(services.AddOptions<RqliteClusteringOptions>());
-            return services.AddSingleton<IMembershipTable, RqliteMembershipTable>();
-        }
-
-        public static IServiceCollection UseRqliteGatewayListProvider(this IServiceCollection services,
-            Action<RqliteGatewayOptions> configureOptions)
-        {
-            return services.UseRqliteGatewayListProvider(ob => ob.Configure(configureOptions));
-        }
-
-        public static IServiceCollection UseRqliteGatewayListProvider(this IServiceCollection services,
-            Action<OptionsBuilder<RqliteGatewayOptions>> configureOptions)
-        {
-            configureOptions?.Invoke(services.AddOptions<RqliteGatewayOptions>());
-            return services.AddSingleton<IGatewayListProvider, RqliteGatewayListProvider>();
+            return builder.ConfigureServices(
+                services =>
+                {
+                    configureOptions?.Invoke(services.AddOptions<RqliteGatewayListProviderOptions>());
+                    services.AddSingleton<IGatewayListProvider, RqliteGatewayListProvider>();
+                });
         }
     }
 }

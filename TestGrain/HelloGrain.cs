@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-namespace SiloTest
+namespace TestGrain
 {
     public class HelloGrain : Grain, IHelloGrain
     {

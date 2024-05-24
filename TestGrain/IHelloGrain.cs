@@ -1,4 +1,4 @@
-﻿namespace SiloTest
+﻿namespace TestGrain
 {
     public interface IHelloGrain : IGrainWithIntegerKey
     {

@@ -13,8 +13,8 @@
 	<PropertyGroup>
 		<PackageId>Orleans.Persistence.Rqlite</PackageId>
 		<Authors>BARRY</Authors>
-		<Title>Microsoft Orleans Reminder Service for Rqlite</Title>
-		<Description>Microsoft Orleans Reminder Service for Rqlite</Description>
+		<Title>Microsoft Orleans Persistence Service for Rqlite</Title>
+		<Description>Microsoft Orleans Persistence Service for Rqlite</Description>
 		<PackageProjectUrl>https://github.com/baryvn/Orleans.Rqlite</PackageProjectUrl>
 		<PackageIconUrl>https://raw.githubusercontent.com/baryvn/Orleans.Rqlite/main/bary-favicon-color.png</PackageIconUrl>
 		<PackageTags>Orleans Cloud-Computing Actor-Model Actors Distributed-Systems Rqlite C# .NET</PackageTags>
@@ -24,7 +24,7 @@
 		<RepositoryType>git</RepositoryType>
 		<IncludeSymbols>true</IncludeSymbols>
 		<IncludeSource>true</IncludeSource>
-		<Version>8.0</Version>
+		<Version>8.0.1</Version>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 </Project>

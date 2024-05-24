@@ -13,39 +13,45 @@ public class RqliteGrainStorage : IGrainStorage, ILifecycleParticipant<ISiloLife
     private readonly string _storageName;
     private readonly RqliteGrainStorageOptions _options;
     private readonly ClusterOptions _clusterOptions;
-    private readonly IRqliteNetClient _client;
 
     public RqliteGrainStorage(string storageName, RqliteGrainStorageOptions options, IOptions<ClusterOptions> clusterOptions)
     {
         _options = options;
         _clusterOptions = clusterOptions.Value;
-        _client = new RqliteNetClient(_options.Uri);
         _storageName = _clusterOptions.ServiceId + "_" + storageName;
     }
 
     private string GetKeyString(string stateName, GrainId grainId)
     {
-        return $"{grainId.Key}.{stateName}";
+        return $"{grainId}.{stateName}";
     }
 
     private Task<List<StateModel>> GetCustomState(string id)
     {
-        return _client.Query<StateModel>("SELECT * FROM " + _storageName + " WHERE GrainId = ?", id);
+        using (var _client = new RqliteNetClient(_options.Uri))
+        {
+            return _client.Query<StateModel>("SELECT * FROM " + _storageName + " WHERE GrainId = ?", id);
+        }
     }
 
     public void Participate(ISiloLifecycle observer)
     {
         observer.Subscribe(
-            observerName: OptionFormattingUtilities.Name<RqliteGrainStorageOptions>(_storageName),
-            stage: ServiceLifecycleStage.ApplicationServices,
-            onStart: async (ct) =>
+        observerName: OptionFormattingUtilities.Name<RqliteGrainStorageOptions>(_storageName),
+        stage: ServiceLifecycleStage.ApplicationServices,
+        onStart: async (ct) =>
+        {
+            using (var _client = new RqliteNetClient(_options.Uri))
             {
                 var queryResults = await _client.Execute("CREATE TABLE IF NOT EXISTS " + _storageName + " (GrainId TEXT PRIMARY KEY, ETag TEXT, State TEXT)");
-            });
+
+            }
+        });
     }
 
     public async Task ClearStateAsync<T>(string stateName, GrainId grainId, IGrainState<T> grainState)
     {
+
         var id = GetKeyString(stateName, grainId);
         var result = await GetCustomState(id);
         if (result.Any())
@@ -54,11 +60,13 @@ public class RqliteGrainStorage : IGrainStorage, ILifecycleParticipant<ISiloLife
             {
                 throw new InconsistentStateException("ETag mismatch.");
             }
-            await _client.Execute($"DELETE FROM " + _storageName + " WHERE GrainId=?", id);
-
-            grainState.ETag = null;
-            grainState.State = Activator.CreateInstance<T>()!;
-            grainState.RecordExists = false;
+            using (var _client = new RqliteNetClient(_options.Uri))
+            {
+                await _client.Execute($"DELETE FROM " + _storageName + " WHERE GrainId=?", id);
+                grainState.ETag = null;
+                grainState.State = Activator.CreateInstance<T>()!;
+                grainState.RecordExists = false;
+            }
         }
     }
 
@@ -91,17 +99,21 @@ public class RqliteGrainStorage : IGrainStorage, ILifecycleParticipant<ISiloLife
             {
                 throw new InconsistentStateException("ETag mismatch.");
             }
-            await _client.Execute($"DELETE FROM " + _storageName + " WHERE GrainId=?", id);
+            using (var _client = new RqliteNetClient(_options.Uri))
+            {
+                await _client.Execute($"DELETE FROM " + _storageName + " WHERE GrainId=?", id);
+            }
         }
 
         grainState.ETag = Guid.NewGuid().ToString();
-
-        var insertResult = await _client.Execute($"INSERT INTO " + _storageName + " (GrainId, ETag, State) VALUES (?, ?, ?)", id, grainState.ETag, dataToSave);
-        if (insertResult.Results!.Single().RowsAffected != 1)
+        using (var _client = new RqliteNetClient(_options.Uri))
         {
-            throw new InconsistentStateException("Error during row insert.");
+            var insertResult = await _client.Execute($"INSERT INTO " + _storageName + " (GrainId, ETag, State) VALUES (?, ?, ?)", id, grainState.ETag, dataToSave);
+            if (insertResult.Results!.Single().RowsAffected != 1)
+            {
+                throw new InconsistentStateException("Error during row insert.");
+            }
         }
-
         grainState.RecordExists = true;
     }
 
