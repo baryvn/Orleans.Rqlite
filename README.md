@@ -5,6 +5,8 @@
 [Rqlite](https://www.Rqlite.io/) rqlite is a distributed relational database that combines the simplicity of SQLite with the robustness of a fault-tolerant, highly available cluster. It's developer-friendly, its operation is straightforward, and its design ensures reliability with minimal complexity.
 
 **Orleans.Rqlite** is a package that use Rqlite as a backend for Orleans providers like Cluster Membership, Grain State storage and Reminders. 
+## Rules for the version
+I will set the version according to the large update of Orleans
 
 # Installation 
 Nuget Packages are provided:
