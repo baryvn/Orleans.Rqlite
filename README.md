@@ -13,8 +13,8 @@ Nuget Packages are provided:
 
 ## coming soon
 - Orleans.Reminder.Rqlite
-
-
+- Authen username/password for Rqlite
+  
 ## Silo
 ```
 IHostBuilder builder = Host.CreateDefaultBuilder(args)
