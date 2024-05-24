@@ -11,10 +11,10 @@ Nuget Packages are provided:
 - Orleans.Persistence.Rqlite
 - Orleans.Clustering.Rqlite
 
-## coming soon
+## Coming soon
 - Orleans.Reminder.Rqlite
-
-
+- Authen username/password for Rqlite
+  
 ## Silo
 ```
 IHostBuilder builder = Host.CreateDefaultBuilder(args)
@@ -58,7 +58,7 @@ using IHost host = builder.Build();
 await host.RunAsync();
 ```
 
-## Client ASP.net
+## Client 
 ```
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseOrleansClient(client =>
