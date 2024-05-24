@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Orleans.Hosting;
 
 namespace Orleans.Reminders.Rqlite
 {

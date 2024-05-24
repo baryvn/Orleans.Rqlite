@@ -17,7 +17,6 @@ namespace Orleans.Runtime.Membership
         private readonly string Uri;
         private readonly string ClusterId;
         private static readonly TableVersion DefaultTableVersion = new TableVersion(0, "0");
-        private const string TableVersionKey = "Version";
 
         public bool IsInitialized { get; private set; }
         public RqliteBasedMembershipTable(

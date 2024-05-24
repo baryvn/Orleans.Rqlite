@@ -1,9 +1,8 @@
-using System;
 using Orleans.Providers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Orleans;
 using Orleans.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 [assembly: RegisterProvider("Rqlite", "Clustering", "Client", typeof(RqliteClusteringProviderBuilder))]
 [assembly: RegisterProvider("Rqlite", "Clustering", "Silo", typeof(RqliteClusteringProviderBuilder))]

@@ -20,12 +20,12 @@
 		<RepositoryType>git</RepositoryType>
 		<IncludeSymbols>true</IncludeSymbols>
 		<IncludeSource>true</IncludeSource>
-		<Version>8.0.1</Version>
+		<Version>8.1.0</Version>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Orleans.Server" Version="8.1.0" />
+		<PackageReference Include="Microsoft.Orleans.Runtime" Version="8.1.0" />
 		<PackageReference Include="RqliteNet" Version="1.1.0" />
 	</ItemGroup>
 </Project>
