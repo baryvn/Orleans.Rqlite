@@ -11,7 +11,7 @@ Nuget Packages are provided:
 - Orleans.Persistence.Rqlite
 - Orleans.Clustering.Rqlite
 
-## coming soon
+## Coming soon
 - Orleans.Reminder.Rqlite
 - Authen username/password for Rqlite
   
