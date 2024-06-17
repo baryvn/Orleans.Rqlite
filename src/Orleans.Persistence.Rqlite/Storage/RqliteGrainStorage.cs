@@ -26,11 +26,11 @@ public class RqliteGrainStorage : IGrainStorage, ILifecycleParticipant<ISiloLife
         return $"{grainId}.{stateName}";
     }
 
-    private Task<List<StateModel>> GetCustomState(string id)
+    private async Task<List<StateModel>> GetCustomState(string id)
     {
         using (var _client = new RqliteNetClient(_options.Uri))
         {
-            return _client.Query<StateModel>("SELECT * FROM " + _storageName + " WHERE GrainId = ?", id);
+            return await _client.Query<StateModel>("SELECT * FROM " + _storageName + " WHERE GrainId = ?", id);
         }
     }
 
