@@ -90,7 +90,7 @@ namespace Orleans.Runtime.Membership
                         }
                     }
 
-                    var result = await _rqlite.Query<MemberModel>(string.Format("SELECT * FROM " + ClusterId + "_Members WHERE SiloAddress = '{0}", siloAddress.ToString()));
+                    var result = await _rqlite.Query<MemberModel>(string.Format("SELECT * FROM " + ClusterId + "_Members WHERE SiloAddress = '{0}'", siloAddress.ToString()));
                     var member = result.Select(p => Tuple.Create(JsonSerializer.Deserialize<MembershipEntry>(p.Data), tableVersion.VersionEtag)).FirstOrDefault();
                     if (member != null)
                     {
@@ -251,7 +251,7 @@ namespace Orleans.Runtime.Membership
                             tableVersion = new TableVersion(table.Version, table.VersionEtag).Next();
                         }
                     }
-                    var result = await _rqlite.Query<MemberModel>(string.Format("SELECT * FROM " + ClusterId + "_Members WHERE SiloAddress = '{0}", entry.SiloAddress.ToString()));
+                    var result = await _rqlite.Query<MemberModel>(string.Format("SELECT * FROM " + ClusterId + "_Members WHERE SiloAddress = '{0}'", entry.SiloAddress.ToString()));
                     var member = result.Select(p => JsonSerializer.Deserialize<MembershipEntry>(p.Data)).FirstOrDefault();
                     if (member != null)
                     {
