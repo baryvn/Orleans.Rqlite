@@ -286,7 +286,7 @@ namespace Orleans.Runtime.Membership
         {
             using (var _rqlite = new RqliteNetClient(this.Uri))
             {
-                await _rqlite.Execute(string.Format("DELETE FROM  " + ClusterId + "_Members WHERE json_extract(Data,'$.Status') = {0} AND json_extract(Data,'$.IAmAliveTime') < '{1}'", beforeDate.ToString(), SiloStatus.Dead));
+                await _rqlite.Execute(string.Format("DELETE FROM  " + ClusterId + "_Members WHERE json_extract(Data,'$.Status') = {0} AND json_extract(Data,'$.IAmAliveTime') < '{1}'", SiloStatus.Dead, beforeDate.ToString("o")));
             }
         }
     }
