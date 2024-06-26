@@ -5,7 +5,7 @@
 [Rqlite](https://www.Rqlite.io/) rqlite is a distributed relational database that combines the simplicity of SQLite with the robustness of a fault-tolerant, highly available cluster. It's developer-friendly, its operation is straightforward, and its design ensures reliability with minimal complexity.
 
 
-# Why Orleans :sparkling_heart: Rqlite
+## Why Orleans :sparkling_heart: Rqlite
 - Orleans is used to manage application logic, distribute actors to handle user requests, and distribute workload.
 - Rqlite is used to store and manage distributed data, ensuring consistency and high reliability of the system.
 
